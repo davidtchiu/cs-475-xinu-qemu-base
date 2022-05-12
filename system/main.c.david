@@ -1,0 +1,46 @@
+/*  main.c  - main */
+
+#include <platform.h>
+#include <stdio.h>
+
+void	printpid()
+{
+	int i;
+	kprintf("Hello XINU WORLD!\r\n");
+
+	for (i=0; i<10; i++)
+	{
+		kprintf("This is process %d\r\n", gettid());
+
+		//uncomment the line below to see cooperative scheduling
+		//resched();
+	}
+}
+
+void	printargs(uint argc, uint *argv)
+{
+	printpid();
+
+	int i;
+	if (argc > 0)
+	{
+		for (i=0; i<10; i++)
+			kprintf("%d\n", argv[i]);
+		kprintf("\r\n");
+	}
+}
+
+int	main(uint argc, uint *argv)
+{
+	//static uint main2args[] = {1, 2, 3};
+	//static uint main3args[] = {10, 20, 30, 40, 50, 60};
+
+        // Create 5 processes
+	ready(create((void*) printpid, INITSTK, 0, "MAIN1", 2, 0, NULL), FALSE);
+	ready(create((void*) printpid, INITSTK, 0, "MAIN2", 2, 0, NULL), FALSE);
+	ready(create((void*) printpid, INITSTK, 0, "MAIN3", 2, 0, NULL), FALSE);
+	//ready(create((void*) printargs, INITSTK, "MAIN4", 2, 3, main2args), FALSE);
+	//ready(create((void*) printargs, INITSTK, "MAIN5", 2, 6, main3args), FALSE);
+
+	return 0;
+}
