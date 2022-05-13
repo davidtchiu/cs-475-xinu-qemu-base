@@ -1,3 +1,18 @@
+# David's Notes #
+
+Use this to run:
+
+```
+qemu-system-i386 -kernel xinu.elf -nographic
+```
+
+Use this to exit monitor attachment:
+
+```
+ctrl+a x
+```
+
+
 # Embedded Xinu #
 
 Embedded Xinu, Copyright (C) 2008, 2009, 2010.  All rights reserved.
